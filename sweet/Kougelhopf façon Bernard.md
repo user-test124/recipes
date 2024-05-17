@@ -5,7 +5,7 @@
 
 | Portions | Preparation | Dont cuisson |
 | ---- | ---- | ---- |
-| 2 moules d'environ 20 cm de diamètre |  |  |
+| 2 moules d'environ 20 cm de diamètre ou 1 moule de 30cm |  |  |
 
 ![[kougelhopf.jpg|500]]
 
