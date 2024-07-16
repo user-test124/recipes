@@ -10,7 +10,7 @@
 
 
 ### Ingredients
-- ﻿**- ﻿1 chou rouge
+- ﻿1 chou rouge
 - 1 oignon
 - 1 pomme 
 - ½ gousse d’ail
@@ -31,7 +31,6 @@
 8. Ajouter des marrons déjà cuits.
 9. A la toute fin, mélanger deux càs de farine dans un peu de vin rouge pour lier la sauce et ajouter au chou. Remuer. 
 10. Saler et poivrer. Ajouter de la cannelle, du piment pour du peps, même un peu de gingembre.
-
 
 ### Tricks
 ### History
