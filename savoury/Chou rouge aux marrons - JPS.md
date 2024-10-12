@@ -3,8 +3,9 @@
 > Recette de Jean-Pierre Schlagg.
 
 | Portions | Preparation | Dont cuisson |
-| ---- | ---- | ---- |
-| 3-4  | 1h | 20 min |
+| -------- | ----------- | ------------ |
+| 3-4      | 1h          | 20 min       |
+
 
 ![[chou_rouge_marrons.png]]
 
@@ -35,3 +36,4 @@
 ### Tricks
 ### History
 
+#alsace

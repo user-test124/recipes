@@ -19,4 +19,4 @@
 ### Tricks
 ### History
 
-#lebanese
+[[lebanese]]

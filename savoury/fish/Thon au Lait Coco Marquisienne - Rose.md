@@ -17,3 +17,6 @@
 - Mettre du lait de coco dans un recipiant et y déposer le poisson essoré; 
 - Rajouter les autres ingrédients, un peu de citron vert selon le goût et du sel;
 - Faire du riz blanc et c'est prêt !
+
+
+[[pesce]]

@@ -3,7 +3,6 @@
 | ---- | ---- | ---- |
 |  |  |  |
 
-![[]]
 
 
 ### Ingredients
@@ -26,4 +25,4 @@
 ### Tricks
 ### History
 
-#lebanese
+[[lebanese]]

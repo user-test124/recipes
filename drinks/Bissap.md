@@ -24,3 +24,5 @@
 5. Goûter et rectifier éventuellement en ajoutant un peu d'eau ou du sucre
 6. Mettre le jus au frais au moins une heure avant de servir
 7. Servir très frais
+
+[[west-af]]
