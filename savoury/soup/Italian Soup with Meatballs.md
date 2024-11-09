@@ -6,7 +6,7 @@
 | -------- | ----------- | ------------ |
 | 2        | 40min       |              |
 
-![[]]
+![[italian_meatball_soup.jpg]]
 ### Ingredients
 - 1 carrot
 - 1 stick celery
