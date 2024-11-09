@@ -3,8 +3,8 @@
 > La recette pour une pizza maison, sans four a pizza.
 
 | Portions | Preparation | Dont cuisson |
-| ---- | ---- | ---- |
-|  |  |  |
+| -------- | ----------- | ------------ |
+|          |             |              |
 
 
 
@@ -82,3 +82,4 @@ Non mettere il lievito direttamente nellâ€™acqua salata. Il sale assorberebbe lâ
 
 ### History
 
+[[italia]]

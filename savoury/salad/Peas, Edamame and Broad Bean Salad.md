@@ -1,6 +1,6 @@
-| Portions | Preparation | Dont cuisson |
-| ---- | ---- | ---- |
-| 4 | 40 min | 30 min |
+| Portions<br>Portions | Preparation | Dont cuisson |
+| -------------------- | ----------- | ------------ |
+| 4                    | 40 min      | 30 min       |
 
 ![[pea_edamame_salade.jpg|600]]
 

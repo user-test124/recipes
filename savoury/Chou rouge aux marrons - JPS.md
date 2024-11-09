@@ -3,14 +3,15 @@
 > Recette de Jean-Pierre Schlagg.
 
 | Portions | Preparation | Dont cuisson |
-| ---- | ---- | ---- |
-| 3-4  | 1h | 20 min |
+| -------- | ----------- | ------------ |
+| 3-4      | 1h          | 20 min       |
+
 
 ![[chou_rouge_marrons.png]]
 
 
 ### Ingredients
-- ﻿**- ﻿1 chou rouge
+- ﻿1 chou rouge
 - 1 oignon
 - 1 pomme 
 - ½ gousse d’ail
@@ -32,7 +33,7 @@
 9. A la toute fin, mélanger deux càs de farine dans un peu de vin rouge pour lier la sauce et ajouter au chou. Remuer. 
 10. Saler et poivrer. Ajouter de la cannelle, du piment pour du peps, même un peu de gingembre.
 
-
 ### Tricks
 ### History
 
+#alsace

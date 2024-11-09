@@ -1,6 +1,7 @@
+
 | Portions | Preparation | Dont cuisson |
-| ---- | ---- | ---- |
-| 4 | 40 min | 20 min |
+| -------- | ----------- | ------------ |
+| 4        | 40 min      | 20 min       |
 
 ![[Pasted image 20240228231258.png]]
 
