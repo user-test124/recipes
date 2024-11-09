@@ -8,7 +8,7 @@
 
 
 
-### Modo 1 ([source](https://www.youtube.com/watch?v=OjsCEJ8CWlg&ab_channel=ProHomeCooks))
+### Modo 1 ([source](https://www.youtube.com/watch?v=Cq90lUQUCUo&ab_channel=ItaliaSquisita))
 
 ### Ingredients
 
@@ -74,11 +74,11 @@ Cottura:
 
 ### Tricks
 
-Il forno a casa non è abbastanza potente [source](https://www.youtube.com/watch?v=OjsCEJ8CWlg&ab_channel=ProHomeCooks)) =>
+Il forno a casa non è abbastanza potente [source](https://www.youtube.com/watch?v=Cq90lUQUCUo&ab_channel=ItaliaSquisita)) =>
 - Zucchero per la colorazione della pizza;
 - Olio per una pizza piu fragrante con tempo di cottura lungo
 
-Non mettere il lievito direttamente nell’acqua salata. Il sale assorberebbe l’acqua del lievito e gli enzimi morirebbero. [source](https://www.youtube.com/watch?v=OjsCEJ8CWlg&ab_channel=ProHomeCooks))
+Non mettere il lievito direttamente nell’acqua salata. Il sale assorberebbe l’acqua del lievito e gli enzimi morirebbero. [source](https://www.youtube.com/watch?v=Cq90lUQUCUo&ab_channel=ItaliaSquisita))
 
 ### History
 
