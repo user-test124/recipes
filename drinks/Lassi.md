@@ -10,7 +10,7 @@
 - 300g de lait;
 - 500g de yaourt grec;
 - cardamome;
-- 1 mangue (~300g).
+- 2 mangue (~300g).
 ### Steps
 1. tout mélanger.
 
