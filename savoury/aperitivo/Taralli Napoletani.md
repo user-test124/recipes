@@ -26,7 +26,7 @@
 7. Incorporare mandorle tostate tritate;
 8. Lasciare riposare per almeno 30min;
 9. Fare pezzi di 45g;
-10. Stendere formando cordoncini. Prenderne due e unire due insieme. Poi arotolarle insieme e chiudere;
+10. Stendere formando cordoncini. Prenderne due e unire due insieme. Poi arrotolarle insieme e chiudere;
 11. Inserire poi le mandorle intere sopra;
 12. Posizionare su una teglia per il forno;
 13. Lasciare a levitare per un paio d'ore;
