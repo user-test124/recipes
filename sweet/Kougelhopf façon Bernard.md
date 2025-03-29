@@ -29,7 +29,7 @@
 
 **Préparation du levain :**
 
-1. Prendre un peu de farine, la levure , la moitié du lait tiède, mélanger et laisser monter 20mn environ dans un endroit tiède. 
+1. Prendre un peu de farine, la levure , la moitié du lait tiède, mélanger et laisser monter 20mn environ dans un endroit tiède. la texture ne dojt pas etre liquide mais doit etre visqueuse, type poolish. 
 
 Préparation de la pate : 
 1. Réunissez dans une terrine la farine restante avec le sel, le sucre, les œufs et le restant du lait tiède.
@@ -38,13 +38,12 @@ Préparation de la pate : 
 4. Tapotez la pâte, «cassez » la, ajoutez les raisins de Malaga épépinés et préalablement trempés dans du kirsch ou de l'eau. Puis ajoutez (facultatif) le petit verre de kirsch.
 5. Dans le moule à kougelhopf bien beurré, déposez au fond, dans chaque cannelure une amande (si possible pelée, et essuyée). 
 6. Déposez la pâte dans le moule et laissez reposer une seconde fois. Il faut que la pâte affleure à hauteur du moule. 
-7. Faites cuire dans un four chauffé à 200°C - 210°C (thermostat 7) pendant 50 mn[^1]. Si le kougelhopf se colore de trop, couvrez-le en cours de cuisson d'une feuille de papier sulfurisé ou réduisez la chaleur à 180° (thermostat 6).
+7. Faites cuire dans un four chauffé à 200°C - 210°C (thermostat 7) pendant 50 mn (voir un peunllus pour le grand moule). Si le kougelhopf se colore de trop, couvrez-le en cours de cuisson d'une feuille de papier sulfurisé ou réduisez la chaleur à 180° (thermostat 6).
 8. Démoulez et saupoudrez de sucre glace.
 
 
 
 
-[^1]  **200°C 30 min (grand moule) 200°C 20 min (petit moule)**
 ### Tricks
 ### History
 
