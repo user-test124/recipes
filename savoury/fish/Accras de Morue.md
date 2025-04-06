@@ -36,3 +36,4 @@
 
 ---
 [[recipe]]
+[[baby-friendly]]
