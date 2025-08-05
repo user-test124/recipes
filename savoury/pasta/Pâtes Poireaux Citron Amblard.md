@@ -1,4 +1,4 @@
-[[pasta]] [[alice]]
+[[pasta]] [[Alice]]
 
 | Portions | Preparation | Dont cuisson |
 | -------- | ----------- | ------------ |
