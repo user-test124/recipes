@@ -15,7 +15,7 @@
 - 10 à 15g d'eau.
 ### Steps
 1. Dans le robot-coupe, mettre la farine et le sel et mélanger;
-2. Ajouter ensuite le beurre froid sorti du four et mélanger 10 secondes;
+2. Ajouter ensuite le beurre froid sorti du frigo et mélanger 10 secondes;
 3. Ajouter ensuite l'oeuf et l'eau et re-mélanger, pas trop longtemps;
 4. La pâte est prête à être utilisée de suite ou alors mise au frigo pour prendre encore mieux.
 
