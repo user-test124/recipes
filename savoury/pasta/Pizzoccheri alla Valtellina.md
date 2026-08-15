@@ -36,4 +36,4 @@
 11. Mescolate e servite subito.
 
 
-[[pasta]] [[italia]]
+#italia
