@@ -2,3 +2,4 @@
 - ail 
 - concentre tomate
 - piments
+- bulgur
