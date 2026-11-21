@@ -1,5 +1,6 @@
 (function () {
   "use strict";
+  var t = function (key, vars) { return window.i18n ? window.i18n.t(key, vars) : ""; };
   var store = {
     get: function (k) { try { return JSON.parse(sessionStorage.getItem(k) || "null"); } catch (e) { return null; } },
     set: function (k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
@@ -41,9 +42,9 @@
       var filtered = state.cat || state.sub || state.tag || words.length;
       if (latest) latest.hidden = !!filtered;
       empty.hidden = shown > 0;
-      empty.querySelector("span").textContent = state.q;
+      empty.textContent = t("empty", { q: state.q });
       active.hidden = !state.tag;
-      if (state.tag) active.querySelector("span").textContent = "Tagged #" + state.tag + " (" + shown + ")";
+      if (state.tag) active.querySelector("span").textContent = t("tagged", { tag: state.tag, n: shown });
       if (push !== false) {
         var p = new URLSearchParams();
         ["cat", "sub", "tag", "q"].forEach(function (k) { if (state[k]) p.set(k, state[k]); });
@@ -69,13 +70,14 @@
     var clear = document.querySelector("[data-clear]");
     if (clear) clear.addEventListener("click", function () { state = { cat: "", sub: "", tag: "", q: "" }; if (q) q.value = ""; apply(); });
     if (q) {
-      var t;
-      q.addEventListener("input", function () { clearTimeout(t); t = setTimeout(function () { state.q = q.value; apply(); }, 80); });
+      var timer;
+      q.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(function () { state.q = q.value; apply(); }, 80); });
       document.addEventListener("keydown", function (e) {
         if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
       });
     }
     apply(false);
+    document.addEventListener("langchange", function () { apply(false); });
   }
 
   /* ---------------- Recipe: ingredient ticks, step progress ---------------- */
@@ -130,7 +132,11 @@
     if (wake && "wakeLock" in navigator) {
       var lock = null;
       wake.hidden = false;
-      var setOn = function (on) { wake.setAttribute("aria-pressed", String(on)); wake.textContent = on ? "Screen stays on" : "Keep screen on"; };
+      var setOn = function (on) {
+        wake.setAttribute("aria-pressed", String(on));
+        wake.dataset.i18n = on ? "wake_on" : "wake_off";
+        wake.textContent = t(wake.dataset.i18n);
+      };
       wake.addEventListener("click", function () {
         if (lock) { lock.release(); lock = null; setOn(false); return; }
         navigator.wakeLock.request("screen").then(function (l) {

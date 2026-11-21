@@ -1,0 +1,7 @@
+{% macro lang_switch() -%}
+    {% if languages|length > 1 %}
+    <div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:language">
+      {%- for l in languages %}<button type="button" data-lang="{{ l }}" aria-pressed="{{ 'true' if l == lang else 'false' }}" lang="{{ l }}">{{ l|upper }}</button>{% endfor %}
+    </div>
+    {% endif %}
+{%- endmacro %}

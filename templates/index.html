@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "_lang.html" import lang_switch with context %}
 {% from "_card.html" import card %}
 {% block body_class %}home{% endblock %}
 {% block meta %}
@@ -9,13 +10,14 @@
 {% block header %}
 <header class="masthead">
   <div class="wrap masthead-inner">
+    <div class="masthead-tools">{{ lang_switch() }}</div>
     <h1 class="masthead-title">{{ site_title }}</h1>
     <div class="masthead-lower">
-    <p class="masthead-tagline">{{ tagline }}</p>
-    <form class="search" role="search" onsubmit="return false">
-      <label for="q" class="visually-hidden">Search recipes</label>
-      <input id="q" type="search" placeholder="Search {{ recipes|length }} recipes or an ingredient" autocomplete="off" spellcheck="false">
-    </form>
+      <p class="masthead-tagline" data-i18n="tagline">{{ tagline }}</p>
+      <form class="search" role="search" onsubmit="return false">
+        <label for="q" class="visually-hidden" data-i18n="search_label">Search recipes</label>
+        <input id="q" type="search" placeholder="Search {{ recipes|length }} recipes or an ingredient" data-i18n-attr="placeholder:search_ph" data-n="{{ recipes|length }}" autocomplete="off" spellcheck="false">
+      </form>
     </div>
   </div>
   <div class="glaze-band" aria-hidden="true"></div>
@@ -24,26 +26,26 @@
 
 {% block main %}
 <div class="wrap">
-  <nav class="tabs" aria-label="Categories">
-    <button class="tab" data-cat="" aria-pressed="true">All <span class="count">{{ recipes|length }}</span></button>
+  <nav class="tabs" aria-label="Categories" data-i18n-attr="aria-label:categories">
+    <button class="tab" data-cat="" aria-pressed="true"><span data-i18n="all">All</span> <span class="count">{{ recipes|length }}</span></button>
     {%- for c in categories %}
-    <button class="tab" data-cat="{{ c.key }}" aria-pressed="false">{{ c.label }} <span class="count">{{ c.count }}</span></button>
+    <button class="tab" data-cat="{{ c.key }}" aria-pressed="false"><span data-label="{{ c.key }}">{{ c.label }}</span> <span class="count">{{ c.count }}</span></button>
     {%- endfor %}
   </nav>
 
   {%- for c in categories if c.subs %}
   <div class="subs" data-for="{{ c.key }}" hidden>
     {%- for s in c.subs %}
-    <button class="chip" data-sub="{{ s.key }}" aria-pressed="false">{{ s.label }} <span class="count">{{ s.count }}</span></button>
+    <button class="chip" data-sub="{{ s.key }}" aria-pressed="false"><span data-label="{{ s.key }}">{{ s.label }}</span> <span class="count">{{ s.count }}</span></button>
     {%- endfor %}
   </div>
   {%- endfor %}
 
-  <p class="active-filter" hidden><span></span> <button type="button" class="link-button" data-clear>Show all recipes</button></p>
+  <p class="active-filter" hidden><span></span> <button type="button" class="link-button" data-clear data-i18n="show_all">Show all recipes</button></p>
 
   {% if latest %}
   <section class="latest" aria-labelledby="latest-h">
-    <h2 id="latest-h" class="section-title">Recently written down</h2>
+    <h2 id="latest-h" class="section-title" data-i18n="latest">Recently written down</h2>
     <div class="grid grid-latest">
       {%- for r in latest %}{{ card(r, root, eager=true) }}{% endfor %}
     </div>
@@ -51,16 +53,16 @@
   {% endif %}
 
   <section class="all" aria-labelledby="all-h">
-    <h2 id="all-h" class="section-title">All recipes</h2>
+    <h2 id="all-h" class="section-title" data-i18n="all_recipes">All recipes</h2>
     <div class="grid" id="grid">
       {%- for r in recipes %}{{ card(r, root) }}{% endfor %}
     </div>
-    <p class="empty" hidden>No recipe matches “<span></span>”. Try one ingredient, like “feta” or “rice”.</p>
+    <p class="empty" hidden></p>
   </section>
 
   {% if tags %}
   <section class="tag-cloud" aria-labelledby="tags-h">
-    <h2 id="tags-h" class="section-title">By tag</h2>
+    <h2 id="tags-h" class="section-title" data-i18n="by_tag">By tag</h2>
     <p>{% for t, n in tags %}<a class="tag" href="?tag={{ t }}">{{ t }}</a> {% endfor %}</p>
   </section>
   {% endif %}

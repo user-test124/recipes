@@ -6,6 +6,10 @@
   <span class="card-photo card-blank" aria-hidden="true"><span>{{ r.title[:1] }}</span></span>
   {%- endif %}
   <span class="card-title">{{ r.title }}</span>
-  <span class="card-meta">{% if r.credit %}From {{ r.credit }}{% else %}{{ (r.subcategory or r.category)|label }}{% endif %}</span>
+  {%- if r.credit %}
+  <span class="card-meta" data-i18n="from" data-x="{{ r.credit }}">From {{ r.credit }}</span>
+  {%- else %}
+  <span class="card-meta" data-label="{{ r.subcategory or r.category }}">{{ (r.subcategory or r.category)|label }}</span>
+  {%- endif %}
 </a>
 {%- endmacro %}

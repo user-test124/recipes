@@ -37,13 +37,48 @@ from pathlib import Path
 # Settings — change freely
 # --------------------------------------------------------------------------
 SITE_TITLE = "pesce mignon"
-SITE_TAGLINE = "Recipes from family, friends and travels, written down so they don't get lost."
+# Languages of the site's own words (menus, headings, buttons). The recipes
+# themselves stay as written. Visitors switch with the EN / FR / IT buttons;
+# the first visit follows the browser's language.
+LANGUAGES = ["en", "fr", "it"]
+SITE_TAGLINE = {
+    "en": "Recipes from family, friends and travels, written down so they don't get lost.",
+    "fr": "Des recettes de famille, d'amis et de voyages, notées pour ne pas les perdre.",
+    "it": "Ricette di famiglia, di amici e di viaggi, scritte per non perderle.",
+}
 SITE_URL = "https://user-test124.github.io/recipes"  # public address (share previews, 404 page)
 
 # Categories come from the folders: the first level is a tab, the second a chip.
-# Folder names are shown capitalised ("vegi" -> "Vegi"). To show a different
-# name, add it here, e.g. {"vegi": "Vegetables", "crepe": "Crêpes"}.
-LABELS: dict[str, str] = {}
+# A folder is shown under its own name ("boissons" -> "Boissons") in every
+# language until it gets names here. Missing languages also fall back to the
+# folder's own name, so a new folder always shows up, translated or not.
+LABELS: dict[str, dict[str, str]] = {
+    "savoury":      {"en": "Savoury",       "fr": "Salé",              "it": "Salato"},
+    "sweet":        {"en": "Sweet",         "fr": "Sucré",             "it": "Dolce"},
+    "drinks":       {"en": "Drinks",        "fr": "Boissons",          "it": "Bevande"},
+    "fermentation": {"en": "Fermentation",  "fr": "Fermentation",      "it": "Fermentazione"},
+    "aperitivo":    {"en": "Aperitivo",     "fr": "Apéritif",          "it": "Aperitivo"},
+    "baked":        {"en": "Baked",         "fr": "Au four",           "it": "Al forno"},
+    "chicken":      {"en": "Chicken",       "fr": "Poulet",            "it": "Pollo"},
+    "crepe":        {"en": "Crêpes",        "fr": "Crêpes",            "it": "Crêpes"},
+    "dip":          {"en": "Dips",          "fr": "Dips",              "it": "Salse e dip"},
+    "fish":         {"en": "Fish",          "fr": "Poisson",           "it": "Pesce"},
+    "galettes":     {"en": "Galettes",      "fr": "Galettes",          "it": "Gallette"},
+    "grain":        {"en": "Grains",        "fr": "Céréales",          "it": "Cereali"},
+    "pasta":        {"en": "Pasta",         "fr": "Pâtes",             "it": "Pasta"},
+    "rice":         {"en": "Rice",          "fr": "Riz",               "it": "Riso"},
+    "salad":        {"en": "Salads",        "fr": "Salades",           "it": "Insalate"},
+    "sauce":        {"en": "Sauces",        "fr": "Sauces",            "it": "Salse"},
+    "shrimp":       {"en": "Shrimp",        "fr": "Crevettes",         "it": "Gamberi"},
+    "terracotta":   {"en": "Terracotta",    "fr": "Terre cuite",       "it": "Terracotta"},
+    "vegi":         {"en": "Vegetables",    "fr": "Légumes",           "it": "Verdure"},
+    "biscuits":     {"en": "Biscuits",      "fr": "Biscuits",          "it": "Biscotti"},
+    "cakes":        {"en": "Cakes",         "fr": "Gâteaux",           "it": "Torte"},
+    "light":        {"en": "Lighter bakes", "fr": "Desserts légers",   "it": "Dolci leggeri"},
+    "pates":        {"en": "Pastry",        "fr": "Pâtes à tarte",     "it": "Basi per torte"},
+    "pudding":      {"en": "Puddings",      "fr": "Puddings",          "it": "Budini"},
+    "tarte":        {"en": "Tarts",         "fr": "Tartes",            "it": "Crostate"},
+}
 IGNORED_DIRS = {"ressource", "resources", "attachments", "assets", "templates", ".obsidian"}
 IGNORED_TAGS = {"recipe", "recipes", "recette"}
 
@@ -108,8 +143,19 @@ def fold(text: str) -> str:
     return "".join(c for c in text if not unicodedata.combining(c)).lower()
 
 
-def label(folder: str) -> str:
-    return LABELS.get(folder.lower(), folder.replace("_", " ").replace("-", " ").capitalize())
+def label(folder: str, lang: str | None = None) -> str:
+    """Name of a folder in `lang`, or the folder's own name if it has none."""
+    own = folder.replace("_", " ").replace("-", " ")
+    own = own[:1].upper() + own[1:]
+    names = LABELS.get(folder.lower()) or {}
+    if isinstance(names, str):          # a single name for every language
+        return names
+    return names.get(lang or LANGUAGES[0]) or own
+
+
+def label_translations(folders) -> dict[str, dict[str, str]]:
+    """{folder: {lang: name}} for every folder on the site (used by the language switch)."""
+    return {f: {lang: label(f, lang) for lang in LANGUAGES} for f in sorted(set(folders)) if f}
 
 
 def is_blank_md(md: str) -> bool:
@@ -665,7 +711,11 @@ def build(content: Path, out: Path, dates_file: Path | None = None) -> list[str]
     env.filters["domain"] = lambda u: re.sub(r"^www\.", "", re.sub(r"^https?://([^/]+).*$", r"\1", u))
     env.filters["label"] = label
     env.filters["fold"] = fold
-    common = dict(site_title=SITE_TITLE, tagline=SITE_TAGLINE, site_url=SITE_URL.rstrip("/"),
+    tagline = SITE_TAGLINE if isinstance(SITE_TAGLINE, dict) else {LANGUAGES[0]: SITE_TAGLINE}
+    page_i18n = {"languages": LANGUAGES, "labels": label_translations([r.category for r in recipes] + [r.subcategory for r in recipes]),
+                 "tagline": {lang: tagline.get(lang) or tagline[LANGUAGES[0]] for lang in LANGUAGES}}
+    common = dict(site_title=SITE_TITLE, tagline=tagline.get(LANGUAGES[0]) or next(iter(tagline.values())),
+                  languages=LANGUAGES, lang=LANGUAGES[0], page_i18n=json.dumps(page_i18n, ensure_ascii=False), site_url=SITE_URL.rstrip("/"),
                   categories=categories, year=time.strftime("%Y"), asset_version=str(int(t0)))
 
     for r in recipes:
@@ -677,7 +727,7 @@ def build(content: Path, out: Path, dates_file: Path | None = None) -> list[str]
         d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(page, encoding="utf-8")
 
-    search_index = [{"s": r.slug, "t": fold(" ".join([r.title, r.credit, label(r.category), label(r.subcategory),
+    search_index = [{"s": r.slug, "t": fold(" ".join([r.title, r.credit] + [label(f, l) for f in (r.category, r.subcategory) if f for l in LANGUAGES] + [
                                                          " ".join(r.tags), r.ingredients_text, r.path.stem]))}
                     for r in recipes]
     (out / "index.html").write_text(env.get_template("index.html").render(

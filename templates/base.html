@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ lang }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,18 +12,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Young+Serif&display=swap">
 <link rel="stylesheet" href="{{ root }}static/style.css?v={{ asset_version }}">
+<script>
+  /* Pick the language before the page paints, so the text doesn't jump */
+  (function () {
+    var langs = {{ languages|tojson }}, saved = null;
+    try { saved = localStorage.getItem("lang"); } catch (e) {}
+    var nav = (navigator.languages || [navigator.language || ""]).map(function (l) { return l.slice(0, 2).toLowerCase(); });
+    var lang = langs.indexOf(saved) > -1 ? saved : (nav.filter(function (l) { return langs.indexOf(l) > -1; })[0] || langs[0]);
+    document.documentElement.lang = lang;
+    if (lang !== langs[0]) document.documentElement.classList.add("i18n-pending");
+  })();
+</script>
 </head>
 <body class="{% block body_class %}{% endblock %}">
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 {% block header %}{% endblock %}
 <main id="main">
 {% block main %}{% endblock %}
 </main>
 <footer class="site-footer">
-  <div class="wrap">
-    <p><a href="{{ root }}">{{ site_title }}</a>. Written in plain markdown, cooked at home.</p>
+  <div class="wrap footer-inner">
+    <p><a href="{{ root }}">{{ site_title }}</a>. <span data-i18n="footer">Written in plain markdown, cooked at home.</span></p>
   </div>
 </footer>
+<script id="page-i18n" type="application/json">{{ page_i18n|safe }}</script>
+<script src="{{ root }}static/i18n.js?v={{ asset_version }}" defer></script>
 <script src="{{ root }}static/app.js?v={{ asset_version }}" defer></script>
 </body>
 </html>

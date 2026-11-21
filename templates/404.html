@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Recipe not found | {{ site_title }}{% endblock %}
+{% from "_lang.html" import lang_switch with context %}
+{% block title %}{{ site_title }}{% endblock %}
 {% block header %}
-<header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="{{ root }}">{{ site_title }}</a></div></header>
+<header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="{{ root }}">{{ site_title }}</a>{{ lang_switch() }}</div></header>
 {% endblock %}
 {% block main %}
 <div class="wrap notfound">
-  <h1 class="recipe-title">This page isn’t in the notebook</h1>
-  <p>The recipe may have been renamed. <a href="{{ root }}">Browse all recipes</a> or search for it there.</p>
+  <h1 class="recipe-title" data-i18n="nf_title">This page isn’t in the notebook</h1>
+  <p><span data-i18n="nf_text">The recipe may have been renamed.</span> <a href="{{ root }}" data-i18n="nf_link">Browse all recipes</a></p>
 </div>
 {% endblock %}

@@ -61,4 +61,14 @@ draft: true        # keep it off the site
 
 ## Settings
 
-At the top of `build.py`: site title, tagline, public address, and optional display names for folders (for example `vegi` → "Vegetables").
+At the top of `build.py`: site title, tagline (one per language), public address, the site languages, and the names of the folders in each language (`LABELS`).
+
+## Languages
+
+The EN / FR / IT buttons switch the site's own words (headings, buttons, hints) and the category names. The recipes stay as written.
+
+Categories are always taken from the folders. A new folder appears under its own name in every language until you add it to `LABELS` in `build.py`, for example:
+
+```python
+"boulangerie": {"en": "Bread", "it": "Pane"},   # French keeps the folder name
+``` A first-time visitor gets their browser's language; after that the site remembers their choice. The words live in `static/i18n.js`; to add a language, add it to `LANGUAGES` in `build.py` and a block of words in `i18n.js`.
