@@ -1,22 +1,21 @@
 # pesce mignon
 
-A static recipe site built from the markdown notes in `learn/cook/recipes`.
+A static recipe site built from the markdown notes in `content/`.
 
 ```
-learn (Obsidian vault)            recipes (this repo)                GitHub Pages
-cook/recipes/*.md  ── sync ──▶  content/   +  build.py  ── build ──▶  user-test124.github.io/recipes
-                   (learn: sync-recipes.yml)     (deploy.yml)
+content/*.md  +  build.py  ── build ──▶  user-test124.github.io/recipes
+                 (deploy.yml)
 ```
 
-- **Write recipes in `learn` only.** `content/` is overwritten by the sync on every push, so don't edit it here.
-- The sync downloads the real photos from Git LFS, copies the notes into `content/`, and records the date each note was first committed (`content/.dates.json`). That date drives "Recently written down".
+- `content/` is filled automatically by a sync, so don't edit it here: changes would be overwritten.
+- `content/.dates.json` records when each note was first written. That date drives "Recently written down"; without it the build uses git history or file dates.
 - A push to `main` builds the site and publishes it with GitHub Pages (Settings → Pages → Source: **GitHub Actions**).
 
 ## Preview on your computer
 
 ```sh
 pip install -r requirements.txt
-python build.py --content ~/Documents/learn/cook/recipes --serve
+python build.py --content path/to/notes --serve
 # open http://localhost:8000
 ```
 
@@ -39,7 +38,7 @@ No special format is needed. The site understands the template the notes already
 | `### Modo 1` … `### Modo 2`, each with its own sections | Separate variants of the recipe |
 | `#alsace` or `[[lebanese]]` on its own line | Tag |
 | `[[Bechamel]]` (another recipe) | Link to that recipe |
-| Folders `savoury/pasta/` | Category tab "Savoury", chip "Pasta" |
+| Folders `savoury/pasta/` | Category tab "Savoury", chip "Pasta" (tabs are ordered by number of recipes) |
 
 Notes whose sections are all empty are left out until they have content.
 
@@ -62,4 +61,4 @@ draft: true        # keep it off the site
 
 ## Settings
 
-At the top of `build.py`: site title, tagline, public address, and the labels for folder names (for example `vegi` → "Vegetables").
+At the top of `build.py`: site title, tagline, public address, and optional display names for folders (for example `vegi` → "Vegetables").

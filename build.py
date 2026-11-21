@@ -14,7 +14,7 @@ title, credit, servings, prep, cook, image, tags, description, source, draft.
 
 Usage:
     python build.py                                   # reads ./content, writes ./_site
-    python build.py --content ~/Documents/learn/cook/recipes --serve
+    python build.py --content path/to/notes --serve
     python build.py dates <notes_dir> > dates.json    # stdlib only, used by CI
 """
 from __future__ import annotations
@@ -40,17 +40,10 @@ SITE_TITLE = "pesce mignon"
 SITE_TAGLINE = "Recipes from family, friends and travels, written down so they don't get lost."
 SITE_URL = "https://user-test124.github.io/recipes"  # public address (share previews, 404 page)
 
-# Folder name -> label shown on the site. Unlisted folders are capitalised.
-LABELS = {
-    "savoury": "Savoury", "sweet": "Sweet", "drinks": "Drinks", "fermentation": "Fermentation",
-    "aperitivo": "Aperitivo", "baked": "Baked", "chicken": "Chicken", "crepe": "Crêpes & pancakes",
-    "dip": "Dips", "fish": "Fish", "galettes": "Galettes", "grain": "Grains", "pasta": "Pasta",
-    "porridge": "Porridge", "rice": "Rice", "salad": "Salads", "sauce": "Sauces",
-    "shrimp": "Shrimp", "terracotta": "Terracotta", "vegi": "Vegetables",
-    "biscuits": "Biscuits", "bredele": "Bredele", "cakes": "Cakes", "light": "Lighter bakes",
-    "pates": "Pastry", "pudding": "Puddings", "tarte": "Tarts",
-}
-CATEGORY_ORDER = ["savoury", "sweet", "drinks", "fermentation"]
+# Categories come from the folders: the first level is a tab, the second a chip.
+# Folder names are shown capitalised ("vegi" -> "Vegi"). To show a different
+# name, add it here, e.g. {"vegi": "Vegetables", "crepe": "Crêpes"}.
+LABELS: dict[str, str] = {}
 IGNORED_DIRS = {"ressource", "resources", "attachments", "assets", "templates", ".obsidian"}
 IGNORED_TAGS = {"recipe", "recipes", "recette"}
 
@@ -656,8 +649,7 @@ def build(content: Path, out: Path, dates_file: Path | None = None) -> list[str]
         if r.subcategory:
             s = c["subs"].setdefault(r.subcategory, {"key": r.subcategory, "label": label(r.subcategory), "count": 0})
             s["count"] += 1
-    order = {k: i for i, k in enumerate(CATEGORY_ORDER)}
-    categories = sorted(cats.values(), key=lambda c: (order.get(c["key"], 99), c["label"]))
+    categories = sorted(cats.values(), key=lambda c: (-c["count"], c["label"]))  # biggest first
     for c in categories:
         c["subs"] = sorted(c["subs"].values(), key=lambda s: s["label"])
 
