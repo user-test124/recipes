@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% from "_card.html" import card %}
+{% block title %}{{ r.title }} | {{ site_title }}{% endblock %}
+{% block description %}{{ r.description or (r.title ~ ", a recipe from " ~ site_title) }}{% endblock %}
+{% block body_class %}recipe-page{% endblock %}
+{% block meta %}
+<meta property="og:title" content="{{ r.title }}">
+<meta property="og:type" content="article">
+{% if r.hero and site_url %}<meta property="og:image" content="{{ site_url }}/{{ r.hero.src }}">{% endif %}
+{% endblock %}
+
+{% block header %}
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="{{ root }}">{{ site_title }}</a>
+    <button class="wake" type="button" aria-pressed="false" hidden>Keep screen on</button>
+  </div>
+</header>
+{% endblock %}
+
+{% block main %}
+{% set has_two = r.groups|length == 1 and 'ingredients' in r.kinds and 'steps' in r.kinds %}
+<article class="recipe" data-slug="{{ r.slug }}">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ root }}?cat={{ r.category }}">{{ r.category|label }}</a>
+      {%- if r.subcategory %} <span aria-hidden="true">/</span> <a href="{{ root }}?cat={{ r.category }}&amp;sub={{ r.subcategory }}">{{ r.subcategory|label }}</a>{% endif %}
+    </nav>
+    <h1 class="recipe-title">{{ r.title }}</h1>
+
+    {% if r.credit or r.sources %}
+    <p class="byline">
+      {%- if r.credit %}<span>From {{ r.credit }}</span>{% endif %}
+      {%- for name, url in r.sources %}
+      <a href="{{ url }}" rel="noopener" target="_blank">{{ name or (url|domain) }}</a>
+      {%- endfor %}
+    </p>
+    {% endif %}
+
+    {% if r.intro_html %}<div class="lede">{{ r.intro_html|safe }}</div>{% endif %}
+
+    {% if r.servings or r.prep or r.cook %}
+    <dl class="facts">
+      {% if r.servings %}<div><dt>Makes</dt><dd>{{ r.servings }}</dd></div>{% endif %}
+      {% if r.prep %}<div><dt>Preparation</dt><dd>{{ r.prep }}</dd></div>{% endif %}
+      {% if r.cook %}<div><dt>Cooking</dt><dd>{{ r.cook }}</dd></div>{% endif %}
+    </dl>
+    {% endif %}
+  </div>
+
+  {% if r.hero %}
+  <figure class="hero">
+    <img src="{{ root }}{{ r.hero.src }}" srcset="{% for part in r.hero.srcset.split(', ') %}{{ root }}{{ part }}{% if not loop.last %}, {% endif %}{% endfor %}" sizes="(min-width: 1180px) 1100px, 100vw" alt="{{ r.title }}" {% if r.hero.w %}width="{{ r.hero.w }}" height="{{ r.hero.h }}"{% endif %}>
+  </figure>
+  {% endif %}
+
+  <div class="wrap">
+    {% for g in r.groups %}
+    <div class="group{% if has_two %} two-col{% endif %}">
+      {% if g.title %}<h2 class="group-title">{{ g.title_html|safe }}</h2>{% endif %}
+      {% for s in g.sections %}
+      {% if s.kind == 'body' %}
+      <div class="section section-body prose">{{ s.html|safe }}</div>
+      {% else %}
+      <section class="section section-{{ s.kind }}{% if s.kind in ['ingredients','steps'] %} prose{% else %} prose{% endif %}" aria-label="{{ {'ingredients':'Ingredients','steps':'Method','tricks':'Tips','history':'The story'}[s.kind] }}">
+        <h2 class="section-heading">{{ {'ingredients':'Ingredients','steps':'Method','tricks':'Tips','history':'The story'}[s.kind] }}</h2>
+        {% if s.kind == 'ingredients' %}<p class="hint">Tap an ingredient once you have it ready.</p>{% endif %}
+        {% if s.kind == 'steps' %}<p class="hint">Tap a step when it’s done.</p>{% endif %}
+        {{ s.html|safe }}
+      </section>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% if r.tags %}
+    <p class="recipe-tags">{% for t in r.tags %}<a class="tag" href="{{ root }}?tag={{ t }}">{{ t }}</a> {% endfor %}</p>
+    {% endif %}
+  </div>
+
+  {% if more %}
+  <aside class="more" aria-labelledby="more-h">
+    <div class="wrap">
+      <h2 id="more-h" class="section-title">More {{ (r.subcategory or r.category)|label|lower }}</h2>
+      <div class="grid grid-latest">{% for o in more %}{{ card(o, root) }}{% endfor %}</div>
+    </div>
+  </aside>
+  {% endif %}
+</article>
+{% endblock %}

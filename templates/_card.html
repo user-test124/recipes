@@ -1,0 +1,11 @@
+{% macro card(r, root, eager=false) -%}
+<a class="card" href="{{ root }}recipes/{{ r.slug }}/" data-slug="{{ r.slug }}" data-cat="{{ r.category }}" data-sub="{{ r.subcategory }}" data-tags="{{ r.tags|join(' ') }}">
+  {%- if r.hero %}
+  <img class="card-photo" src="{{ root }}{{ r.hero.small }}" alt="" {% if not eager %}loading="lazy" {% endif %}width="480" height="360">
+  {%- else %}
+  <span class="card-photo card-blank" aria-hidden="true"><span>{{ r.title[:1] }}</span></span>
+  {%- endif %}
+  <span class="card-title">{{ r.title }}</span>
+  <span class="card-meta">{% if r.credit %}From {{ r.credit }}{% else %}{{ (r.subcategory or r.category)|label }}{% endif %}</span>
+</a>
+{%- endmacro %}

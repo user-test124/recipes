@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Recipe not found | {{ site_title }}{% endblock %}
+{% block header %}
+<header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="{{ root }}">{{ site_title }}</a></div></header>
+{% endblock %}
+{% block main %}
+<div class="wrap notfound">
+  <h1 class="recipe-title">This page isn’t in the notebook</h1>
+  <p>The recipe may have been renamed. <a href="{{ root }}">Browse all recipes</a> or search for it there.</p>
+</div>
+{% endblock %}

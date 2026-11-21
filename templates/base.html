@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site_title }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ tagline }}{% endblock %}">
+{% block meta %}{% endblock %}
+<meta name="theme-color" content="#2343A0">
+<link rel="icon" href="{{ root }}static/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="{{ root }}static/style.css?v={{ asset_version }}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<a class="skip" href="#main">Skip to content</a>
+{% block header %}{% endblock %}
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><a href="{{ root }}">{{ site_title }}</a>. Written in plain markdown, cooked at home.</p>
+  </div>
+</footer>
+<script src="{{ root }}static/app.js?v={{ asset_version }}" defer></script>
+</body>
+</html>
