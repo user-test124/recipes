@@ -2,3 +2,6 @@
 - ail 
 - concentre tomate
 - piments
+- bulgur
+- olives 
+- ras el hanout 

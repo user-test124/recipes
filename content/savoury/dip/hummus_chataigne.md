@@ -11,7 +11,6 @@
 - ﻿﻿4 belles cuil. à soupe de tahini
 - ﻿﻿1 gousse d'ail épluchée
 - ﻿﻿2 cuil. à soupe d'huile d'olive
-
 - ﻿﻿1 cuil. à café de cumin moulu
 - ﻿﻿3 cuil. à soupe d'eau
 - ﻿﻿Des graines de sésame ou de courge

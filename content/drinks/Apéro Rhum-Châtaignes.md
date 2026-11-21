@@ -1,6 +1,6 @@
 
 
-> Recette de Christophe des chemins de la nature.
+> Recette de [Christophe des chemins de la nature](https://www.lechemindelanature.com/3-formations-en-ligne?key=christophe%20de%20hody).
 
 
 | Portions | Preparation | Dont cuisson |
