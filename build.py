@@ -491,6 +491,16 @@ def tidy_lists(md: str) -> str:
     return md
 
 
+def tidy_ingredients(md: str) -> str:
+    """Drop a trailing ";" or "." from each ingredient ("200g de beurre;" -> "200g de beurre")."""
+    def repl(m):
+        text = m.group(2)
+        if re.search(r"(?:\betc|\.\.)\.\s*$", text):
+            return m.group(0)
+        return m.group(1) + re.sub(r"\s*[;.]+\s*$", "", text)
+    return re.sub(r"(?m)^(\s*(?:[-*+]|\d+[.)])\s+)(.*\S)\s*$", repl, md)
+
+
 SUBLABEL_RE = re.compile(
     r"<p>((?:<strong>)?[^<\n]{1,60}?(?:</strong>)?)\s*</p>(?=\s*<[ou]l)", re.S)
 
@@ -671,6 +681,8 @@ def build(content: Path, out: Path, dates_file: Path | None = None) -> list[str]
                 smd = MD_IMAGE_RE.sub(lambda m: m.group(0) if m.group(2).startswith("http")
                                       else embed_sub(r.path.parent)(EMBED_RE.match(f"![[{m.group(2)}]]")), smd)
                 smd = WIKILINK_RE.sub(wikilink_sub, smd)
+                if kind == "ingredients":
+                    smd = tidy_ingredients(smd)
                 rendered = md.render(smd)
                 rendered = rendered.replace("<a href=\"http", "<a rel=\"noopener\" target=\"_blank\" href=\"http")
                 if kind in ("ingredients", "steps"):
