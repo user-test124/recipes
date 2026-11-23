@@ -19,4 +19,4 @@
 7. Cuir à la poêle.
 
 
-[[jps]]
+[[jps]] #alsace #winter

@@ -36,4 +36,4 @@ La patate douce remplace le beurre en donnant de l'aération et du volume aux ga
 
 ---
 [[recipe]]
-#healthy
+#healthy #autumn #winter

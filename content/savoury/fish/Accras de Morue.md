@@ -36,4 +36,4 @@
 
 ---
 [[recipe]]
-[[baby-friendly]]
+[[baby-friendly]] #antilles #pesce

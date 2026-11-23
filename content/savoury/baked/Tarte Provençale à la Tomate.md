@@ -1,6 +1,6 @@
 
 
-> [source](https://www.youtube.com/watch?v=vlhyrNCpiAA)
+> [Jigmé](https://www.youtube.com/watch?v=vlhyrNCpiAA)
 
 | Portions | Preparation | Dont cuisson |
 | -------- | ----------- | ------------ |
@@ -32,4 +32,4 @@ Garniture:
 
 
 ---
-[[recipe]]
+[[recipe]] #provence #summer

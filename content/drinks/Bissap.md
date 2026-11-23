@@ -25,4 +25,4 @@
 6. Mettre le jus au frais au moins une heure avant de servir
 7. Servir très frais
 
-[[west-af]]
+[[west-af]] #summer

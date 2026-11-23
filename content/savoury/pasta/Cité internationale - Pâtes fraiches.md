@@ -17,4 +17,4 @@
 Chaque type de pâte correspond à une sauce. Plus la pâte prend du temps à être mâchée, plus la sauce doit prendre du temps à être mâchée (eg: viande). Les pâtes brutes (avec rainures) sont parfaites pour retenir la sauce.
 
 
-[[pasta]]
+#pasta

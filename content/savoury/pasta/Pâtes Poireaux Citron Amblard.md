@@ -1,4 +1,4 @@
-[[pasta]] [[Alice]]
+#pasta
 
 | Portions | Preparation | Dont cuisson |
 | -------- | ----------- | ------------ |
@@ -18,3 +18,5 @@
 - Remettre le mix dans la casserole avec le reste de poireaux  
 - Cuire les pâtes  
 - Ajouter feta, jus de citron et poivre dans les poireaux
+
+#autumn #winter

@@ -22,3 +22,5 @@
 - Add the rice to the bowl once cold, stir again  
 - If needed, add more sesame oil or soy sauce  
 - Finally add the sesame seeds and rocket salad
+
+#rice #healthy #autumn #winter

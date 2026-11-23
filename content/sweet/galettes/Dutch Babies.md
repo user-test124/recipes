@@ -18,4 +18,4 @@
 
 
 ---
-[[recipe]]
+[[recipe]] #american

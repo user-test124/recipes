@@ -16,4 +16,4 @@
 
 
 ---
-[[recipe]]
+[[recipe]] #jps #alsace

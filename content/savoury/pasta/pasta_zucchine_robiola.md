@@ -19,4 +19,4 @@
 
 
 
-[[jps]]
+[[jps]] #italia #summer

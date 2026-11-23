@@ -24,3 +24,5 @@
 5. Add the frozen peas & edamame to the pan with the onion and cook for another 3-5 minutes. 
 6. Add in the cooked braid beans and stir to combine. 
 7. Season with salt and pepper and serve with the chopped dill and the rocket leaves.
+
+#healthy #spring

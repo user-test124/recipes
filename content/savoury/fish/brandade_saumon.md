@@ -42,4 +42,4 @@
 
 ---
 [[recipe]]
-[[baby-friendly]]
+[[baby-friendly]] #pesce

@@ -25,4 +25,4 @@
 Vous pouvez ajouter en topping des champignons
 
 
-#chinese
+#japanese

@@ -26,4 +26,4 @@ La courgette remplace le beurre en donnant de l'aération et du volume aux gatea
 
 ---
 [[recipe]]
-#healthy
+#healthy #summer

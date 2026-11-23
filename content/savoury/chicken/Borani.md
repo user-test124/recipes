@@ -24,4 +24,4 @@
 
 ---
 [[recipe]]
-#georgian
+#georgian #summer

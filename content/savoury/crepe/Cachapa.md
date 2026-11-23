@@ -38,3 +38,5 @@
 
 # Trick
 They’re usually made with fresh corn, but I’ve used frozen corn for ease; if you’d prefer to use fresh, just stand the husk up on a board and shave off the kernels with a big, sharp knife; don’t use tinned sweetcorn here, though, because it’s far too wet. If you like, make the pancakes and the cheese mixture up to 24 hours ahead, ready for stuffing the following day.
+
+#venezuelan #summer

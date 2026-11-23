@@ -28,8 +28,4 @@
 4. Add the stock to pan to deglaze - deglaze basically means to scrape all the bits off the bottom of the pan, add the cream and remaining parsley leaves, stir to combine, add the caramelised onions back to the pan, bring the sauce to a low simmer whilst the pasta is cooking. When the pasta is nearly ready, reduce the heat to low and stir in the parmesan.
 5. Add the spaghetti, chill prawns and a ladle of pasta water, toss to combine and serve immediately. Garnish with some more grated parmesan.
 
-
-
-
-
-
+#pasta
