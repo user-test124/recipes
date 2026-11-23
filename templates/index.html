@@ -43,6 +43,15 @@
 
   <p class="active-filter" hidden><span></span> <button type="button" class="link-button" data-clear data-i18n="show_all">Show all recipes</button></p>
 
+  {% for season in seasons if in_season[season] %}
+  <section class="latest in-season" data-season="{{ season }}" aria-labelledby="season-h-{{ season }}" hidden>
+    <h2 id="season-h-{{ season }}" class="section-title" data-i18n="in_season_{{ season }}">In season: {{ season }}</h2>
+    <div class="grid grid-latest">
+      {%- for r in in_season[season] %}{{ card(r, root) }}{% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
   {% if latest %}
   <section class="latest" aria-labelledby="latest-h">
     <h2 id="latest-h" class="section-title" data-i18n="latest">Recently written down</h2>
@@ -63,7 +72,7 @@
   {% if tags %}
   <section class="tag-cloud" aria-labelledby="tags-h">
     <h2 id="tags-h" class="section-title" data-i18n="by_tag">By tag</h2>
-    <p>{% for t, n in tags %}<a class="tag" href="?tag={{ t }}">{{ t }}</a> {% endfor %}</p>
+    <p>{% for t, n in tags %}<a class="tag" href="?tag={{ t }}"{% if t in season_tags %} data-i18n="season_{{ t }}"{% endif %}>{{ t }}</a> {% endfor %}</p>
   </section>
   {% endif %}
 </div>

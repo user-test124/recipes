@@ -3,6 +3,10 @@
   "use strict";
   var STRINGS = {
     en: {
+      season: "Season", season_spring: "Spring", season_summer: "Summer", season_autumn: "Autumn", season_winter: "Winter",
+      all_year: "All year", sources: "Sources", source_one: "Source",
+      in_season_spring: "In season this spring", in_season_summer: "In season this summer",
+      in_season_autumn: "In season this autumn", in_season_winter: "In season this winter",
       skip: "Skip to content", footer: "Written in plain markdown, cooked at home.", language: "Language",
       search_label: "Search recipes", search_ph: "Search {n} recipes or an ingredient", categories: "Categories",
       all: "All", show_all: "Show all recipes", latest: "Recently written down", all_recipes: "All recipes",
@@ -15,6 +19,10 @@
       nf_title: "This page isn’t in the notebook", nf_text: "The recipe may have been renamed.", nf_link: "Browse all recipes"
     },
     fr: {
+      season: "Saison", season_spring: "Printemps", season_summer: "Été", season_autumn: "Automne", season_winter: "Hiver",
+      all_year: "Toute l’année", sources: "Sources", source_one: "Source",
+      in_season_spring: "De saison ce printemps", in_season_summer: "De saison cet été",
+      in_season_autumn: "De saison cet automne", in_season_winter: "De saison cet hiver",
       skip: "Aller au contenu", footer: "Écrit en markdown, cuisiné à la maison.", language: "Langue",
       search_label: "Rechercher une recette", search_ph: "Chercher parmi {n} recettes ou un ingrédient", categories: "Catégories",
       all: "Tout", show_all: "Voir toutes les recettes", latest: "Notées récemment", all_recipes: "Toutes les recettes",
@@ -27,6 +35,10 @@
       nf_title: "Cette page n’est pas dans le carnet", nf_text: "La recette a peut-être été renommée.", nf_link: "Voir toutes les recettes"
     },
     it: {
+      season: "Stagione", season_spring: "Primavera", season_summer: "Estate", season_autumn: "Autunno", season_winter: "Inverno",
+      all_year: "Tutto l’anno", sources: "Fonti", source_one: "Fonte",
+      in_season_spring: "Di stagione questa primavera", in_season_summer: "Di stagione questa estate",
+      in_season_autumn: "Di stagione questo autunno", in_season_winter: "Di stagione questo inverno",
       skip: "Vai al contenuto", footer: "Scritto in markdown, cucinato a casa.", language: "Lingua",
       search_label: "Cerca ricette", search_ph: "Cerca tra {n} ricette o un ingrediente", categories: "Categorie",
       all: "Tutte", show_all: "Mostra tutte le ricette", latest: "Scritte di recente", all_recipes: "Tutte le ricette",

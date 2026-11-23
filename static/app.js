@@ -16,7 +16,11 @@
     } catch (e) {}
     var cards = Array.prototype.slice.call(grid.querySelectorAll(".card"));
     var q = document.getElementById("q");
-    var latest = document.querySelector(".latest");
+    var latest = document.querySelector(".latest:not(.in-season)");
+    /* European seasons: Mar-May spring, Jun-Aug summer, Sep-Nov autumn, Dec-Feb winter */
+    var month = new Date().getMonth();
+    var season = ["winter", "winter", "spring", "spring", "spring", "summer", "summer", "summer", "autumn", "autumn", "autumn", "winter"][month];
+    var seasonRow = document.querySelector('.in-season[data-season="' + season + '"]');
     var empty = document.querySelector(".empty");
     var active = document.querySelector(".active-filter");
     var params = new URLSearchParams(location.search);
@@ -41,10 +45,11 @@
       });
       var filtered = state.cat || state.sub || state.tag || words.length;
       if (latest) latest.hidden = !!filtered;
+      if (seasonRow) seasonRow.hidden = !!filtered;
       empty.hidden = shown > 0;
       empty.textContent = t("empty", { q: state.q });
       active.hidden = !state.tag;
-      if (state.tag) active.querySelector("span").textContent = t("tagged", { tag: state.tag, n: shown });
+      if (state.tag) active.querySelector("span").textContent = t("tagged", { tag: (["spring", "summer", "autumn", "winter"].indexOf(state.tag) > -1 ? t("season_" + state.tag).toLowerCase() : state.tag), n: shown });
       if (push !== false) {
         var p = new URLSearchParams();
         ["cat", "sub", "tag", "q"].forEach(function (k) { if (state[k]) p.set(k, state[k]); });

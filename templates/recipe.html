@@ -31,24 +31,21 @@
     </nav>
     <h1 class="recipe-title">{{ r.title }}</h1>
 
-    {% if r.credit or r.sources %}
-    <p class="byline">
-      {%- if r.credit %}<span class="credit" data-i18n="from" data-x="{{ r.credit }}">From {{ r.credit }}</span>{% endif %}
-      {%- for name, url in r.sources %}
-      <span class="source"><span data-i18n="{{ 'source' if loop.first else 'also' }}">{{ 'Source:' if loop.first else 'Also:' }}</span> <a href="{{ url }}" rel="noopener" target="_blank">{{ name or (url|domain) }}</a></span>
-      {%- endfor %}
-    </p>
+    {% if r.credit %}
+    <p class="byline"><span class="credit" data-i18n="from" data-x="{{ r.credit }}">From {{ r.credit }}</span></p>
     {% endif %}
 
     {% if r.intro_html %}<div class="lede">{{ r.intro_html|safe }}</div>{% endif %}
 
-    {% if r.servings or r.prep or r.cook %}
     <dl class="facts">
       {% if r.servings %}<div><dt data-i18n="makes">Makes</dt><dd>{{ r.servings }}</dd></div>{% endif %}
       {% if r.prep %}<div><dt data-i18n="prep">Preparation</dt><dd>{{ r.prep }}</dd></div>{% endif %}
       {% if r.cook %}<div><dt data-i18n="cook">Cooking</dt><dd>{{ r.cook }}</dd></div>{% endif %}
+      <div class="season-fact"><dt data-i18n="season">Season</dt><dd>
+        {%- if r.seasons %}{% for se in r.seasons %}<a href="{{ root }}?tag={{ se }}" class="season season-{{ se }}" data-i18n="season_{{ se }}">{{ se|capitalize }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
+        {%- else %}<span data-i18n="all_year">All year</span>{% endif -%}
+      </dd></div>
     </dl>
-    {% endif %}
     <button class="wake" type="button" aria-pressed="false" data-i18n="wake_off" hidden>Keep screen on</button>
   </div>
 
@@ -78,7 +75,18 @@
     {% endfor %}
 
     {% if r.tags %}
-    <p class="recipe-tags">{% for t in r.tags %}<a class="tag" href="{{ root }}?tag={{ t }}">{{ t }}</a> {% endfor %}</p>
+    <p class="recipe-tags">{% for t in r.tags %}<a class="tag" href="{{ root }}?tag={{ t }}"{% if t in season_tags %} data-i18n="season_{{ t }}"{% endif %}>{{ t }}</a> {% endfor %}</p>
+    {% endif %}
+
+    {% if r.sources %}
+    <section class="sources" aria-labelledby="sources-h">
+      <h2 id="sources-h" class="sources-title" data-i18n="{{ 'source_one' if r.sources|length == 1 else 'sources' }}">{{ 'Source' if r.sources|length == 1 else 'Sources' }}</h2>
+      <ul>
+        {%- for name, url in r.sources %}
+        <li><a href="{{ url }}" rel="noopener" target="_blank">{{ name or (url|domain) }}</a>{% if name %} <span class="source-domain">({{ url|domain }})</span>{% endif %}</li>
+        {%- endfor %}
+      </ul>
+    </section>
     {% endif %}
   </div>
 

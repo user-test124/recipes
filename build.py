@@ -79,6 +79,11 @@ LABELS: dict[str, dict[str, str]] = {
     "pudding":      {"en": "Puddings",      "fr": "Puddings",          "it": "Budini"},
     "tarte":        {"en": "Tarts",         "fr": "Tartes",            "it": "Crostate"},
 }
+# Season tags (#spring, #summer, #autumn, #winter) are shown as "Season" on a
+# recipe and feed the "In season" row on the home page. A recipe without one
+# is shown as good all year.
+SEASONS = ["spring", "summer", "autumn", "winter"]
+
 IGNORED_DIRS = {"ressource", "resources", "attachments", "assets", "templates", ".obsidian"}
 IGNORED_TAGS = {"recipe", "recipes", "recette"}
 
@@ -484,6 +489,8 @@ def tidy_lists(md: str) -> str:
     md = re.sub(r"(?m)^(\s*)([-*+])\s+[-*+]\s+(?=\S)", r"\1\2 ", md)       # "- - text"
     md = re.sub(r"(?m)^\s*(?:[-*+]|\d+[.)])\s*$\n?", "", md)                # empty bullets
     md = re.sub(r"\\\s*$", "", md, flags=re.M)                              # stray "\" at EOL
+    # An ALL-CAPS label right after a list item ("GARNISH") must not glue onto that item
+    md = re.sub(r"(?m)^(\s*(?:[-*+]|\d+[.)])\s[^\n]*)\n(?=[A-ZÀ-Ý][A-ZÀ-Ý &'-]{2,30}\s*\n)", r"\1\n\n", md)
     # A label line right after a list item ("Cottura:") must not glue onto that item
     md = re.sub(r"(?m)^(\s*(?:[-*+]|\d+[.)])\s[^\n]*)\n(?=[^\s\-*+\d#>|][^\n]{0,60}:\s*\n)", r"\1\n\n", md)
     # A label line ("Impasto:", "**Cottura :**", "GARNISH") directly followed by a list
@@ -497,8 +504,8 @@ def tidy_ingredients(md: str) -> str:
         text = m.group(2)
         if re.search(r"(?:\betc|\.\.)\.\s*$", text):
             return m.group(0)
-        return m.group(1) + re.sub(r"\s*[;.]+\s*$", "", text)
-    return re.sub(r"(?m)^(\s*(?:[-*+]|\d+[.)])\s+)(.*\S)\s*$", repl, md)
+        return m.group(1) + re.sub(r"[ \t]*[;.]+[ \t]*$", "", text)
+    return re.sub(r"(?m)^([ \t]*(?:[-*+]|\d+[.)])[ \t]+)(.*\S)[ \t]*$", repl, md)
 
 
 SUBLABEL_RE = re.compile(
@@ -670,6 +677,7 @@ def build(content: Path, out: Path, dates_file: Path | None = None) -> list[str]
             if t and t not in IGNORED_TAGS and t not in tags:
                 tags.append(t)
         r.tags = tags
+        r.seasons = [t for t in SEASONS if t in tags]
         r.related_links = [by_name[fold(n)] for n in r.links if fold(n) in by_name and by_name[fold(n)] is not r]
 
         groups = []
@@ -726,7 +734,7 @@ def build(content: Path, out: Path, dates_file: Path | None = None) -> list[str]
     tagline = SITE_TAGLINE if isinstance(SITE_TAGLINE, dict) else {LANGUAGES[0]: SITE_TAGLINE}
     page_i18n = {"languages": LANGUAGES, "labels": label_translations([r.category for r in recipes] + [r.subcategory for r in recipes]),
                  "tagline": {lang: tagline.get(lang) or tagline[LANGUAGES[0]] for lang in LANGUAGES}}
-    common = dict(site_title=SITE_TITLE, tagline=tagline.get(LANGUAGES[0]) or next(iter(tagline.values())),
+    common = dict(season_tags=SEASONS, site_title=SITE_TITLE, tagline=tagline.get(LANGUAGES[0]) or next(iter(tagline.values())),
                   languages=LANGUAGES, lang=LANGUAGES[0], page_i18n=json.dumps(page_i18n, ensure_ascii=False), site_url=SITE_URL.rstrip("/"),
                   categories=categories, year=time.strftime("%Y"), asset_version=str(int(t0)))
 
@@ -742,8 +750,13 @@ def build(content: Path, out: Path, dates_file: Path | None = None) -> list[str]
     search_index = [{"s": r.slug, "t": fold(" ".join([r.title, r.credit] + [label(f, l) for f in (r.category, r.subcategory) if f for l in LANGUAGES] + [
                                                          " ".join(r.tags), r.ingredients_text, r.path.stem]))}
                     for r in recipes]
+    in_season = {}
+    for season in SEASONS:
+        picks = [r for r in recipes if season in r.seasons]
+        picks.sort(key=lambda r: (r.hero is None, len(r.seasons), fold(r.title)))  # photos and true seasonal dishes first
+        in_season[season] = picks[:8]
     (out / "index.html").write_text(env.get_template("index.html").render(
-        recipes=recipes, latest=latest, tags=sorted(tag_counts.items(), key=lambda kv: (-kv[1], kv[0])),
+        recipes=recipes, latest=latest, in_season=in_season, seasons=SEASONS, tags=sorted(tag_counts.items(), key=lambda kv: (-kv[1], kv[0])),
         search_index=json.dumps(search_index, ensure_ascii=False), root="", **common), encoding="utf-8")
     (out / "404.html").write_text(env.get_template("404.html").render(root=(re.sub(r"^https?://[^/]+", "", SITE_URL).rstrip("/") + "/"), **common), encoding="utf-8")
 
